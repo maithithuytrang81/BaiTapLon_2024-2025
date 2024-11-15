@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Thanh toán</title>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <img src="img/banner-seka-1.jpg" alt="Promotional Banner">
+        </div>
+        <h1>Thanh toán</h1>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Nhập thông tin thanh toán</h2>
+            <form id="paymentForm">
+                <label for="cardholderName">Tên chủ thẻ:</label>
+                <input type="text" id="cardholderName" name="cardholderName" required placeholder="Nguyễn Văn A">
+
+                <label for="cardNumber">Số thẻ:</label>
+                <input type="text" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9012 3456">
+                
+                <label for="expiryDate">Ngày hết hạn:</label>
+                <input type="text" id="expiryDate" name="expiryDate" required placeholder="MM/YY">
+                
+                <label for="email">Địa chỉ email:</label>
+                <input type="email" id="email" name="email" required placeholder="email@example.com">
+                
+                <label for="phone">Số điện thoại:</label>
+                <input type="text" id="phone" name="phone" required placeholder="0123456789">
+                
+                <button type="submit">Thanh toán</button>
+            </form>
+            <p id="paymentMessage"></p>
+
+            <button onclick="goHome()">Trở về trang chủ</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>📍 Chi Nhánh Tại Hà Nội: 123 Phố Huế, Hai Bà Trưng, Hà Nội<br>
+            📍 Chi Nhánh Tại Đà Nẵng: 456 Nguyễn Văn Linh, Hải Châu, Đà Nẵng</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function goHome() {
+            window.location.href = 'index.html'; // Thay đổi 'index.html' thành trang chủ của bạn
+        }
+    </script>
+</body>
+</html>
+
+
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.banner img {
+            width: 100%;
+            height: 330px;
+            border-radius: 5px;
+        }
+main {
+    padding: 20px;
+}
+
+section {
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="email"]:focus {
+    border-color: #4CAF50; /* Màu viền khi focus */
+    outline: none; /* Bỏ outline mặc định */
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049; /* Màu nền khi hover */
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px; /* Để cách footer với nội dung trên */
+}
+
+</style>
+
+ 

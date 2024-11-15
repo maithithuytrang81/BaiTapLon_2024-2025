@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="language.js" defer></script> <!-- Thêm file JavaScript -->
+    <title>Select Language</title>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <img src="img/banner-seka-1.jpg" alt="Promotional Banner">
+        </div>
+        <h1 data-lang-en="Select Language" data-lang-vi="Chọn Ngôn Ngữ">Select Language</h1>
+        <nav>
+            <ul>
+                <li><a href="index_en.html" data-lang-en="Home" data-lang-vi="Trang Chủ">Home</a></li>
+                <li><a href="about_en.html" data-lang-en="About" data-lang-vi="Giới Thiệu">About</a></li>
+                <li><a href="contact_en.html" data-lang-en="Contact" data-lang-vi="Liên Hệ">Contact</a></li>
+                <li><a href="cart_en.html" data-lang-en="Cart" data-lang-vi="Giỏ Hàng">Cart</a></li>
+                <li><a href="payment_en.html" data-lang-en="Payment" data-lang-vi="Thanh Toán">Payment</a></li>
+                <li><a href="login_en.html" data-lang-en="Login" data-lang-vi="Đăng Nhập">Login</a></li>
+                <li><a href="register_en.html" data-lang-en="Register" data-lang-vi="Đăng Ký">Register</a></li>
+                <li>
+                    <select id="languageSelector">
+                        <option value="en" data-lang-en="English" data-lang-vi="Tiếng Anh">English</option>
+                        <option value="vi" data-lang-en="Vietnamese" data-lang-vi="Tiếng Việt">Vietnamese</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 data-lang-en="Select Your Preferred Language" data-lang-vi="Chọn Ngôn Ngữ Ưa Thích">Select Your Preferred Language</h2>
+        <p><a href="index.html" data-lang-en="Vietnamese" data-lang-vi="Tiếng Việt">Vietnamese</a></p>
+        <p><a href="index_en.html" data-lang-en="English" data-lang-vi="Tiếng Anh">English</a></p>
+    </main>
+    
+    <footer>
+        <p data-lang-en="📍 Chi Nhánh Tại Hà Nội: 123 Phố Huế, Hai Bà Trưng, Hà Nội
+        📍 Chi Nhánh Tại Đà Nẵng: 456 Nguyễn Văn Linh, Hải Châu, Đà Nẵng" data-lang-vi="&copy; 2024 Cửa Hàng Đồ Gia Dụng. Đã đăng ký bản quyền.">📍 Chi Nhánh Tại Hà Nội: 123 Phố Huế, Hai Bà Trưng, Hà Nội<br>
+            📍 Chi Nhánh Tại Đà Nẵng: 456 Nguyễn Văn Linh, Hải Châu, Đà Nẵng</p>
+    </footer>
+</body>
+</html>
+
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #4CAF50;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+.banner img {
+            width: 100%;
+            height: 330px;
+            border-radius: 5px;
+        }
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li select {
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 1em;
+}
+
+main {
+    padding: 20px;
+    width: 80%;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    font-size: 1.8em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    margin: 10px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+</style>

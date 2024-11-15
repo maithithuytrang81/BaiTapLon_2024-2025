@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Giỏ Hàng</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .banner img {
+            width: 100%;
+            height: 330px;
+            border-radius: 5px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #d9ffd9;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        #cart-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #eaeaea;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none; /* Loại bỏ viền dưới cho sản phẩm cuối cùng */
+        }
+
+        .cart-item h4 {
+            margin: 0;
+            color: #4CAF50;
+            font-size: 18px;
+        }
+
+        .cart-item p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border: 1px solid #4CAF50; /* Hiệu ứng khi nhập liệu */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px); /* Hiệu ứng di chuyển nhẹ khi hover */
+        }
+
+        #total-container {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 20px;
+            color: #333;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px; /* Để cách footer với nội dung trên */
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <img src="img/banner-seka-1.jpg" alt="Promotional Banner">
+        </div>
+        <h1>Giỏ Hàng</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="login.html">Đăng nhập</a></li>
+                <li><a href="register.html">Đăng ký</a></li>
+                <li><a href="payment.html">Thanh toán</a></li>
+                <li><a href="cart.html">Giỏ hàng</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Sản phẩm trong giỏ hàng</h2>
+        <div id="cart-container"></div>
+        <div id="total-container">
+            <h3>Tổng tiền: <span id="total-price">0</span> VND</h3>
+        </div>
+        <button onclick="checkout()">Thanh toán</button>
+    </main>
+
+    <footer>
+        <p>📍 Chi Nhánh Tại Hà Nội: 123 Phố Huế, Hai Bà Trưng, Hà Nội<br>
+            📍 Chi Nhánh Tại Đà Nẵng: 456 Nguyễn Văn Linh, Hải Châu, Đà Nẵng</p>
+    </footer>
+
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContainer = document.getElementById('cart-container');
+            cartContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p>Giỏ hàng trống!</p>';
+                return;
+            }
+
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                totalPrice += item.price * item.quantity;
+
+                const productDiv = document.createElement('div');
+                productDiv.className = 'cart-item';
+                productDiv.innerHTML = `
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p>Giá: ${item.price} VND</p>
+                        <p>Số lượng: <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)"></p>
+                    </div>
+                    <button onclick="removeFromCart(${index})">Xóa</button>
+                `;
+                cartContainer.appendChild(productDiv);
+            });
+
+            document.getElementById('total-price').innerText = totalPrice;
+        }
+
+function updateQuantity(index, quantity) {
+    if (quantity < 1 || isNaN(quantity)) {
+        alert('Số lượng không hợp lệ!');
+        return;
+    }
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    cart[index].quantity = parseInt(quantity);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    loadCart();
+}
+
+        function removeFromCart(index) {
+            const cart = JSON.parse(localStorage.getItem('cart'));
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function checkout() {
+            window.location.href = 'payment.html';
+        }
+
+        // Load giỏ hàng khi trang được tải
+        window.onload = loadCart;
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Web Bán Đồ Gia Dụng</title>
+    <style>
+        /* CSS cơ bản cho sản phẩm */
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Xếp 5 sản phẩm trong một hàng */
+            gap: 10px; /* Khoảng cách giữa các ô sản phẩm */
+            margin: 0; /* Bỏ khoảng cách ngoài của container */
+        }
+
+        .product {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            transition: box-shadow 0.3s;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* CSS cho thanh tìm kiếm và lọc */
+        .search-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="text"], select {
+            padding: 10px;
+            margin: 5px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* CSS cho banner */
+        .banner {
+            width: 100%;
+            max-height: 300px; /* Chiều cao tối đa của banner */
+            margin-bottom: 20px; /* Khoảng cách dưới banner */
+            overflow: hidden; /* Ẩn các phần thừa nếu ảnh quá cao */
+        }
+
+        .banner img {
+            width: 100%;
+            height: 330px;  
+            border-radius: 5px;
+        }
+        .product button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.product button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+button:active {
+    transform: translateY(0); /* Trở về vị trí ban đầu khi nhấn */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <img src="img/banner-seka-1.jpg" alt="Banner Khuyến Mãi">
+        </div>
+        <h1>Chào mừng đến với cửa hàng đồ gia dụng</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="cart.html">Giỏ hàng</a></li>
+                <li><a href="payment.html">Thanh toán</a></li>
+                <li><a href="login.html">Đăng nhập</a></li>
+                <li><a href="register.html">Đăng ký</a></li>
+                <li><a href="ngonngu.html">Ngôn ngữ</a></li>  
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." onkeyup="filterProducts()">
+            <select id="categorySelect" onchange="filterProducts()">
+                <option value="">Tất cả loại</option>
+                <option value="nồi">Nồi</option>
+                <option value="máy">Máy</option>
+                <option value="bếp">Bếp</option>
+                <option value="tủ">Tủ</option>
+                <option value="lò">Lò</option>
+                <option value="bình">Bình</option>
+                <option value="tivi">Tivi</option>
+            </select>
+        </div>
+        <h2>Danh sách sản phẩm</h2>
+        <div class="product-container" id="productContainer">
+            <div class="product" data-category="nồi">
+                <img src="img/noi-com-dien-cookin-10l-rm-na10-1.jpg" alt="Nồi cơm điện">
+                <h3><a href="product.html?name=Nồi cơm điện&price=500000">Nồi cơm điện</a></h3>
+                <p>Giá: 500,000 VND</p>
+                <button onclick="addToCart('Nồi cơm điện', 500000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product" data-category="máy">
+                <img src="img/may-xay-sinh-to-braun-jb9040bk-g.jpg" alt="Máy xay sinh tố">
+                <h3><a href="product.html?name=Máy xay sinh tố&price=700000">Máy xay sinh tố</a></h3>
+                <p>Giá: 700,000 VND</p>
+                <button onclick="addToCart('Máy xay sinh tố', 700000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product" data-category="bếp">
+                <img src="img/bep-dien-tu-sato-ih668plus-g.jpg" alt="Bếp điện từ">
+                <h3><a href="product.html?name=Bếp điện từ&price=1200000">Bếp điện từ</a></h3>
+                <p>Giá: 1,200,000 VND</p>
+                <button onclick="addToCart('Bếp điện từ', 1200000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product" data-category="máy">
+                <img src="img/may-giat-cua-truoc-bosch-wak24260sg-a.jpg" alt="Máy giặt">
+                <h3><a href="product.html?name=Máy giặt&price=5000000">Máy giặt</a></h3>
+                <p>Giá: 5,000,000 VND</p>
+                <button onclick="addToCart('Máy giặt', 5000000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product" data-category="tủ">
+                <img src="img/tu-lanh-panasonic-nr-bv329qsvn.webp" alt="Tủ lạnh">
+                <h3><a href="product.html?name=Tủ lạnh&price=8000000">Tủ lạnh</a></h3>
+                <p>Giá: 8,000,000 VND</p>
+                <button onclick="addToCart('Tủ lạnh', 8000000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product" data-category="lò">
+                <img src="img/lo-vi-song-Zelmer-ZMW3103X.jpg" alt="Lò vi sóng">
+                <h3><a href="product.html?name=Lò vi sóng&price=1000000">Lò vi sóng</a></h3>
+                <p>Giá: 1,000,000 VND</p>
+                <button onclick="addToCart('Lò vi sóng', 1000000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product" data-category="máy">
+                <img src="img/may-pha-ca-phe-lehehe-7100-1.webp" alt="Máy pha cà phê">
+                <h3><a href="product.html?name=Máy pha cà phê&price=2500000">Máy pha cà phê</a></h3>
+                <p>Giá: 2,500,000 VND</p>
+                <button onclick="addToCart('Máy pha cà phê', 2500000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product" data-category="bình">
+                <img src="img/d51477441e5375bbe980bf04a4e75f3d.webp" alt="Bình đun siêu tốc">
+                <h3><a href="product.html?name=Bình đun siêu tốc&price=300000">Bình đun siêu tốc</a></h3>
+                <p>Giá: 300,000 VND</p>
+                <button onclick="addToCart('Bình đun siêu tốc', 300000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product" data-category="nồi">
+                <img src="img/noi-ap-suat-inox-ih-poongnyun-hnvpc-06ih-3-2l-1.jpg" alt="Nồi áp suất">
+                <h3><a href="product.html?name=Nồi áp suất&price=900000">Nồi áp suất</a></h3>
+                <p>Giá: 900,000 VND</p>
+                <button onclick="addToCart('Nồi áp suất', 900000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product" data-category="tivi">
+                <img src="img/tivi-sony-43-inch-smart-kdl-43w660g-mau-2019-g1.webp" alt="Tivi LED">
+                <h3><a href="product.html?name=Tivi LED&price=15000000">Tivi LED</a></h3>
+                <p>Giá: 15,000,000 VND</p>
+                <button onclick="addToCart('Tivi LED', 15000000)">Thêm vào giỏ hàng</button>
+            </div>
+        </div>        
+    </main>
+    
+    <footer>
+        <p>📍 Chi Nhánh Tại Hà Nội: 123 Phố Huế, Hai Bà Trưng, Hà Nội<br>
+            📍 Chi Nhánh Tại Đà Nẵng: 456 Nguyễn Văn Linh, Hải Châu, Đà Nẵng</p>
+    </footer>
+
+    <script>
+        function filterProducts() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const categorySelect = document.getElementById('categorySelect').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+
+            products.forEach(product => {
+                const productName = product.querySelector('h3').innerText.toLowerCase();
+                const productCategory = product.getAttribute('data-category').toLowerCase();
+                const matchesSearch = productName.includes(searchInput);
+                const matchesCategory = categorySelect === '' || productCategory === categorySelect;
+
+                if (matchesSearch && matchesCategory) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function addToCart(productName, productPrice) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const product = { name: productName, price: productPrice };
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${productName} đã được thêm vào giỏ hàng.`);
+        }
+    </script>
+</body>
+</html>

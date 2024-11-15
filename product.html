@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Nồi cơm điện - Chi tiết sản phẩm</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .banner img {
+            width: 100%;
+            height: 330px;
+            border-radius: 5px;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        p {
+            color: #555;
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="banner">
+            <img src="img/banner-seka-1.jpg" alt="Promotional Banner">
+        </div>
+        <h1>Chi tiết sản phẩm</h1>
+    </header>
+
+    <main>
+        <h2 id="product-name"></h2>
+        <img id="product-image" src="" alt="Sản phẩm">
+        <p id="product-price"></p>
+        <button id="add-to-cart-btn">Thêm vào giỏ hàng</button>
+        <button id="back-btn">Trở về</button> <!-- Nút trở về -->
+    </main>
+
+    <footer>
+        <p>📍 Chi Nhánh Tại Hà Nội: 123 Phố Huế, Hai Bà Trưng, Hà Nội<br>
+            📍 Chi Nhánh Tại Đà Nẵng: 456 Nguyễn Văn Linh, Hải Châu, Đà Nẵng</p>
+    </footer>
+
+    <script>
+        // Lấy tham số từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get('name');
+        const productPrice = urlParams.get('price');
+
+        // Hiển thị thông tin sản phẩm trên trang
+        document.getElementById('product-name').innerText = productName;
+        document.getElementById('product-price').innerText = `Giá: ${productPrice} VND`;
+
+        // Thay đổi hình ảnh sản phẩm tương ứng
+        const productImages = {
+    'Nồi cơm điện': 'img/noi-com-dien-cookin-10l-rm-na10-1.jpg',
+    'Máy xay sinh tố': 'img/may-xay-sinh-to-braun-jb9040bk-g.jpg',
+    'Bếp điện từ': 'img/bep-dien-tu-sato-ih668plus-g.jpg',
+    'Máy giặt': 'img/may-giat-cua-truoc-bosch-wak24260sg-a.jpg',
+    'Tủ lạnh': 'img/tu-lanh-panasonic-nr-bv329qsvn.webp',
+    'Lò vi sóng': 'img/lo-vi-song-Zelmer-ZMW3103X.jpg',
+    'Máy pha cà phê': 'img/may-pha-ca-phe-lehehe-7100-1.webp',
+    'Bình đun siêu tốc': 'img/d51477441e5375bbe980bf04a4e75f3d.webp',
+    'Nồi áp suất': 'img/noi-ap-suat-inox-ih-poongnyun-hnvpc-06ih-3-2l-1.jpg',
+    'Tivi LED': 'img/tivi-sony-43-inch-smart-kdl-43w660g-mau-2019-g1.webp'
+};
+
+
+
+        document.getElementById('product-image').src = productImages[productName] || '';
+
+        // Xử lý thêm sản phẩm vào giỏ hàng
+        document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+            addToCart(productName, productPrice);
+        });
+
+        function addToCart(name, price) {
+            const product = {
+                name: name,
+                price: parseInt(price),
+                quantity: 1
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const existingProduct = cart.find(item => item.name === name);
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                cart.push(product);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${name} đã được thêm vào giỏ hàng!`);
+        }
+
+        // Xử lý nút trở về
+        document.getElementById('back-btn').addEventListener('click', function() {
+            window.history.back(); // Quay trở lại trang trước
+        });
+    </script>
+</body>
+</html>
